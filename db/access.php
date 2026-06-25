@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information for Embed poll
+ * Capability definitions for Embed poll.
  *
  * @package    filter_embedpoll
  * @copyright  2026 Andrew Rowatt <A.J.Rowatt@massey.ac.nz>
@@ -24,9 +24,25 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component    = 'filter_embedpoll';
-$plugin->release      = '1.0';
-$plugin->version      = 2026062501;
-$plugin->requires     = 2024100700;
-$plugin->supported    = [405, 405];
-$plugin->maturity     = MATURITY_STABLE;
+$capabilities = [
+
+    // Cast or change a vote in a poll. Granted to students by default.
+    'filter/embedpoll:vote' => [
+        'captype' => 'write',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => [
+            'student' => CAP_ALLOW,
+        ],
+    ],
+
+    // Always see poll results without voting. Granted to teaching roles by default.
+    'filter/embedpoll:viewresults' => [
+        'captype' => 'read',
+        'contextlevel' => CONTEXT_MODULE,
+        'archetypes' => [
+            'teacher' => CAP_ALLOW,
+            'editingteacher' => CAP_ALLOW,
+            'manager' => CAP_ALLOW,
+        ],
+    ],
+];

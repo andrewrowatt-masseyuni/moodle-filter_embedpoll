@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information for Embed poll
+ * Web service definitions for Embed poll.
  *
  * @package    filter_embedpoll
  * @copyright  2026 Andrew Rowatt <A.J.Rowatt@massey.ac.nz>
@@ -24,9 +24,12 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->component    = 'filter_embedpoll';
-$plugin->release      = '1.0';
-$plugin->version      = 2026062501;
-$plugin->requires     = 2024100700;
-$plugin->supported    = [405, 405];
-$plugin->maturity     = MATURITY_STABLE;
+$functions = [
+    'filter_embedpoll_vote' => [
+        'classname' => 'filter_embedpoll\external\vote',
+        'description' => 'Cast or change the current user\'s vote in a poll and return the revealed results.',
+        'type' => 'write',
+        'ajax' => true,
+        'loginrequired' => true,
+    ],
+];

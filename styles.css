@@ -1,0 +1,28 @@
+/* Embed poll filter styles. */
+
+.filter-embedpoll {
+    margin: 1rem 0;
+    font-size: 90%;
+}
+
+.filter-embedpoll .embedpoll-option {
+    cursor: pointer;
+}
+
+.filter-embedpoll .embedpoll-option[disabled] {
+    cursor: default;
+    opacity: 1;
+}
+
+.filter-embedpoll .embedpoll-option.embedpoll-selected {
+    border-left: 3px solid var(--primary, #0f6cbf);
+}
+
+.filter-embedpoll .embedpoll-option-label {
+    font-weight: 400;
+}
+
+.filter-embedpoll .embedpoll-progress {
+    height: 0.5rem;
+    background-color: rgba(0, 0, 0, 0.08);
+}
