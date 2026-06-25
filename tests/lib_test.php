@@ -26,7 +26,6 @@ namespace filter_embedpoll;
  * @covers     \filter_embedpoll\poll
  */
 final class lib_test extends \advanced_testcase {
-
     public function test_plugin_installed(): void {
         $this->assertNotEmpty(get_config('filter_embedpoll', 'version'));
     }
@@ -90,8 +89,10 @@ final class lib_test extends \advanced_testcase {
         poll::record_vote($poll, (int) $student->id, 0);
         poll::record_vote($poll, (int) $student->id, 2);
 
-        $this->assertSame(1, $DB->count_records('filter_embedpoll_vote',
-            ['pollid' => $poll->id, 'userid' => $student->id]));
+        $this->assertSame(1, $DB->count_records(
+            'filter_embedpoll_vote',
+            ['pollid' => $poll->id, 'userid' => $student->id]
+        ));
         $data = poll::export_for_template($poll, $items, $context, (int) $student->id);
         $this->assertTrue($data['items'][2]['selected']);
         $this->assertFalse($data['items'][0]['selected']);

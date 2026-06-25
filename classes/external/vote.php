@@ -31,7 +31,6 @@ use filter_embedpoll\poll;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class vote extends external_api {
-
     /**
      * Parameters definition.
      *

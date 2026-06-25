@@ -33,11 +33,7 @@ use core_privacy\local\request\transform;
  * @copyright  2026 Andrew Rowatt <A.J.Rowatt@massey.ac.nz>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-class provider implements
-    \core_privacy\local\metadata\provider,
-    \core_privacy\local\request\plugin\provider,
-    \core_privacy\local\request\core_userlist_provider {
-
+class provider implements \core_privacy\local\request\core_userlist_provider, \core_privacy\local\metadata\provider, \core_privacy\local\request\plugin\provider {
     /**
      * Describe the types of data stored by this plugin.
      *
@@ -136,8 +132,12 @@ class provider implements
      */
     public static function delete_data_for_all_users_in_context(\context $context): void {
         global $DB;
-        $pollids = $DB->get_fieldset_select('filter_embedpoll_poll', 'id', 'contextid = :contextid',
-            ['contextid' => $context->id]);
+        $pollids = $DB->get_fieldset_select(
+            'filter_embedpoll_poll',
+            'id',
+            'contextid = :contextid',
+            ['contextid' => $context->id]
+        );
         if ($pollids) {
             [$insql, $inparams] = $DB->get_in_or_equal($pollids, SQL_PARAMS_NAMED);
             $DB->delete_records_select('filter_embedpoll_vote', "pollid $insql", $inparams);
@@ -155,8 +155,12 @@ class provider implements
         $userid = $contextlist->get_user()->id;
 
         foreach ($contextlist->get_contexts() as $context) {
-            $pollids = $DB->get_fieldset_select('filter_embedpoll_poll', 'id', 'contextid = :contextid',
-                ['contextid' => $context->id]);
+            $pollids = $DB->get_fieldset_select(
+                'filter_embedpoll_poll',
+                'id',
+                'contextid = :contextid',
+                ['contextid' => $context->id]
+            );
             if (!$pollids) {
                 continue;
             }
@@ -181,8 +185,12 @@ class provider implements
             return;
         }
 
-        $pollids = $DB->get_fieldset_select('filter_embedpoll_poll', 'id', 'contextid = :contextid',
-            ['contextid' => $context->id]);
+        $pollids = $DB->get_fieldset_select(
+            'filter_embedpoll_poll',
+            'id',
+            'contextid = :contextid',
+            ['contextid' => $context->id]
+        );
         if (!$pollids) {
             return;
         }

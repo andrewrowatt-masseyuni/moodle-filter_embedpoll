@@ -29,7 +29,6 @@ namespace filter_embedpoll;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class text_filter extends \core_filters\text_filter {
-
     /** @var string Matches a single poll embed code, capturing its inner item list. */
     private const PATTERN = '/\{poll:(.*?)\}/';
 
@@ -71,7 +70,12 @@ class text_filter extends \core_filters\text_filter {
         $seen = [];
 
         return preg_replace_callback(self::PATTERN, function ($matches) use (
-            $contextid, $chapterid, $courseid, &$seen, $OUTPUT, $USER
+            $contextid,
+            $chapterid,
+            $courseid,
+            &$seen,
+            $OUTPUT,
+            $USER
         ) {
             $items = $this->parse_items($matches[1]);
             if (count($items) < 2) {
@@ -110,8 +114,14 @@ class text_filter extends \core_filters\text_filter {
         $chapterid = optional_param('chapterid', 0, PARAM_INT);
         if (!$chapterid) {
             // No chapter in the URL: default to the first chapter of the book.
-            $firstchapter = $DB->get_records('book_chapters', ['bookid' => $cm->instance],
-                'pagenum ASC', 'id', 0, 1);
+            $firstchapter = $DB->get_records(
+                'book_chapters',
+                ['bookid' => $cm->instance],
+                'pagenum ASC',
+                'id',
+                0,
+                1
+            );
             $firstchapter = reset($firstchapter);
             if ($firstchapter) {
                 $chapterid = (int) $firstchapter->id;

@@ -28,7 +28,6 @@ namespace filter_embedpoll;
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class poll {
-
     /** @var string Capability required to cast or change a vote. */
     public const CAP_VOTE = 'filter/embedpoll:vote';
 
@@ -57,8 +56,13 @@ class poll {
      * @param int $courseid Enclosing course id, or 0.
      * @return \stdClass The poll record.
      */
-    public static function get_or_create(int $contextid, int $chapterid, array $items,
-            int $ordinal, int $courseid): \stdClass {
+    public static function get_or_create(
+        int $contextid,
+        int $chapterid,
+        array $items,
+        int $ordinal,
+        int $courseid
+    ): \stdClass {
         global $DB;
 
         $hash = self::hash_items($items);
@@ -159,8 +163,12 @@ class poll {
      * @param int $userid
      * @return array Template context.
      */
-    public static function export_for_template(\stdClass $poll, array $items,
-            \context $context, int $userid): array {
+    public static function export_for_template(
+        \stdClass $poll,
+        array $items,
+        \context $context,
+        int $userid
+    ): array {
         global $DB;
 
         $canvote = has_capability(self::CAP_VOTE, $context, $userid);
