@@ -26,13 +26,14 @@
     * canviewresults - Whether the user always sees results
     * showresults - Whether results are revealed to this user
     * total - Total number of votes
+    * totaltext - Localised, pluralised total-votes label (e.g. "1 vote", "5 votes")
     * hasvotes - Whether there is at least one vote
     * items - Array of {index, label, count, percent, selected}
 
     Example context (json):
     {
         "pollid": 7, "contextid": 42, "canvote": true, "canviewresults": false,
-        "hasvoted": true, "showresults": true, "total": 3, "hasvotes": true,
+        "hasvoted": true, "showresults": true, "total": 3, "totaltext": "3 votes", "hasvotes": true,
         "items": [
             {"index": 0, "label": "Red", "count": 2, "percent": 67, "selected": true},
             {"index": 1, "label": "Green", "count": 1, "percent": 33, "selected": false},
@@ -70,7 +71,7 @@
     </div>
     {{#showresults}}
     <p class="embedpoll-total text-muted small mt-2 mb-0">
-        {{#hasvotes}}<span data-region="embedpoll-total">{{total}}</span> {{#str}}votes, filter_embedpoll{{/str}}{{/hasvotes}}
+        {{#hasvotes}}<span data-region="embedpoll-total">{{totaltext}}</span>{{/hasvotes}}
         {{^hasvotes}}{{#str}}novotesyet, filter_embedpoll{{/str}}{{/hasvotes}}
     </p>
     {{/showresults}}

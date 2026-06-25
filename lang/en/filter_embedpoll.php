@@ -37,4 +37,5 @@ $string['privacy:metadata:filter_embedpoll_vote:timecreated'] = 'The time the vo
 $string['privacy:metadata:filter_embedpoll_vote:timemodified'] = 'The time the vote was last changed.';
 $string['privacy:metadata:filter_embedpoll_vote:userid'] = 'The user who voted.';
 $string['resultshiddenhint'] = 'Select an option to vote and see the results.';
-$string['votes'] = 'votes';
+$string['votecount'] = '{$a} vote';
+$string['votecountplural'] = '{$a} votes';

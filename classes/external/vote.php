@@ -83,6 +83,7 @@ class vote extends external_api {
             'hasvoted' => new external_value(PARAM_BOOL, 'Whether the user has voted'),
             'showresults' => new external_value(PARAM_BOOL, 'Whether results are revealed to the user'),
             'total' => new external_value(PARAM_INT, 'Total number of votes'),
+            'totaltext' => new external_value(PARAM_TEXT, 'Localised, pluralised total-votes label'),
             'hasvotes' => new external_value(PARAM_BOOL, 'Whether there is at least one vote'),
             'items' => new external_multiple_structure(
                 new external_single_structure([

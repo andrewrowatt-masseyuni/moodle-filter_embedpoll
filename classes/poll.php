@@ -216,6 +216,8 @@ class poll {
             ];
         }
 
+        $totaltext = get_string($total === 1 ? 'votecount' : 'votecountplural', 'filter_embedpoll', $total);
+
         return [
             'pollid' => (int) $poll->id,
             'contextid' => (int) $poll->contextid,
@@ -224,6 +226,7 @@ class poll {
             'hasvoted' => $hasvoted,
             'showresults' => $showresults,
             'total' => $total,
+            'totaltext' => $totaltext,
             'hasvotes' => $total > 0,
             'items' => $itemsout,
         ];
