@@ -37,9 +37,9 @@ Feature: Embed poll filter renders polls in a book
   @javascript
   Scenario: Identical polls in different chapters track votes independently
     Given the following "mod_book > chapter" exist:
-      | book      | title     | content                  |
-      | Test book | Chapter 1 | <p>Agree? {poll:"Yes","No"}</p> |
-      | Test book | Chapter 2 | <p>Agree? {poll:"Yes","No"}</p> |
+      | book      | title     | pagenum | content                         |
+      | Test book | Chapter 1 | 1       | <p>Agree? {poll:"Yes","No"}</p> |
+      | Test book | Chapter 2 | 2       | <p>Agree? {poll:"Yes","No"}</p> |
     When I am on the "Test book" "book activity" page logged in as "student1"
     And I click on "Yes" "button"
     Then "span.progress-bar" "css_element" should exist
