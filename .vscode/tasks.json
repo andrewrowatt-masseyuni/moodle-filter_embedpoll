@@ -125,7 +125,7 @@
         {
             "label": "Run PHPDoc checker",
             "type": "shell",
-            "command": "/home/arowatt/moodle-docker/bin/moodle-docker-compose exec webserver php filter/moodlecheck/cli/moodlecheck.php -p=filter/embedpoll -f=text | tee /dev/stderr | grep -vz error",
+            "command": "/home/arowatt/moodle-docker/bin/moodle-docker-compose exec webserver php local/moodlecheck/cli/moodlecheck.php -p=filter/embedpoll -f=text | tee /dev/stderr | grep -vz error",
             "presentation": {
                 "panel": "dedicated"
             },
