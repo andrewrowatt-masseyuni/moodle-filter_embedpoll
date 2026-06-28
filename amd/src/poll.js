@@ -79,6 +79,15 @@ const handleClick = async(e) => {
 
         const {html, js} = await Templates.renderForPromise('filter_embedpoll/poll', data);
         await Templates.replaceNode(widget, html, js);
+
+        // Restore keyboard focus to the chosen option in the re-rendered widget,
+        // so keyboard and screen reader users are not dropped to the top of the
+        // page and hear the option's updated pressed state and result.
+        const refreshed = document.querySelector(`${SEL_WIDGET}[data-pollid="${pollid}"]`);
+        const chosen = refreshed && refreshed.querySelector(`${SEL_OPTION}[data-choice="${choice}"]`);
+        if (chosen) {
+            chosen.focus();
+        }
     } catch (err) {
         buttons.forEach(b => {
             b.disabled = false;

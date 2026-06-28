@@ -30,6 +30,7 @@ $string['embedpoll:vote'] = 'Vote in a poll';
 $string['error_invalidchoice'] = 'The selected option is not valid for this poll.';
 $string['filtername'] = 'Embed poll';
 $string['novotesyet'] = 'No votes yet';
+$string['polloptions'] = 'Poll options';
 $string['privacy:metadata:filter_embedpoll_vote'] = 'Stores the option each user voted for in an embedded poll.';
 $string['privacy:metadata:filter_embedpoll_vote:choice'] = 'The index of the option the user voted for.';
 $string['privacy:metadata:filter_embedpoll_vote:pollid'] = 'The poll the vote belongs to.';

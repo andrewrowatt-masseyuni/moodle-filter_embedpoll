@@ -15,7 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Web service definitions for Embed poll.
+ * Event observer registrations for Embed poll.
  *
  * @package    filter_embedpoll
  * @copyright  2026 Andrew Rowatt <A.J.Rowatt@massey.ac.nz>
@@ -24,13 +24,13 @@
 
 defined('MOODLE_INTERNAL') || die();
 
-$functions = [
-    'filter_embedpoll_vote' => [
-        'classname' => 'filter_embedpoll\external\vote',
-        'description' => 'Cast or change the current user\'s vote in a poll and return the revealed results.',
-        'type' => 'write',
-        'capabilities' => 'filter/embedpoll:vote',
-        'ajax' => true,
-        'loginrequired' => true,
+$observers = [
+    [
+        'eventname' => '\core\event\course_module_deleted',
+        'callback' => '\filter_embedpoll\observer::course_module_deleted',
+    ],
+    [
+        'eventname' => '\core\event\course_deleted',
+        'callback' => '\filter_embedpoll\observer::course_deleted',
     ],
 ];

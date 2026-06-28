@@ -26,7 +26,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component    = 'filter_embedpoll';
 $plugin->release      = '1.0';
-$plugin->version      = 2026062501;
+$plugin->version      = 2026062801;
 $plugin->requires     = 2024100700;
 $plugin->supported    = [405, 405];
 $plugin->maturity     = MATURITY_STABLE;

@@ -29,7 +29,7 @@ $capabilities = [
     // Cast or change a vote in a poll. Granted to students by default.
     'filter/embedpoll:vote' => [
         'captype' => 'write',
-        'contextlevel' => CONTEXT_MODULE,
+        'contextlevel' => CONTEXT_COURSE,
         'archetypes' => [
             'student' => CAP_ALLOW,
         ],
@@ -38,7 +38,7 @@ $capabilities = [
     // Always see poll results without voting. Granted to teaching roles by default.
     'filter/embedpoll:viewresults' => [
         'captype' => 'read',
-        'contextlevel' => CONTEXT_MODULE,
+        'contextlevel' => CONTEXT_COURSE,
         'archetypes' => [
             'teacher' => CAP_ALLOW,
             'editingteacher' => CAP_ALLOW,

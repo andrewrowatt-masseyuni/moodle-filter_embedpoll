@@ -42,7 +42,7 @@
     }
 }}
 <div class="filter-embedpoll" data-region="filter-embedpoll" data-pollid="{{pollid}}" data-contextid="{{contextid}}">
-    <div class="list-group embedpoll-options" role="group">
+    <div class="list-group embedpoll-options" role="group" aria-label="{{#str}}polloptions, filter_embedpoll{{/str}}">
         {{#items}}
         <button type="button"
                 class="list-group-item list-group-item-action embedpoll-option text-left{{#selected}} embedpoll-selected{{/selected}}"
