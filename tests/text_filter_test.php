@@ -60,6 +60,14 @@ final class text_filter_test extends \advanced_testcase {
     }
 
     /**
+     * Switch the filter on site-wide, as an admin would. It is off when installed.
+     */
+    private function switch_on(): void {
+        \filter_manager::reset_caches();
+        filter_set_global_state('embedpoll', TEXTFILTER_ON);
+    }
+
+    /**
      * Run the filter.
      *
      * @param \context $context The text's context.
@@ -68,14 +76,6 @@ final class text_filter_test extends \advanced_testcase {
      */
     private function filter(\context $context, string $text): string {
         return (new text_filter($context, []))->filter($text);
-    }
-
-    /**
-     * Installing the filter switches it on.
-     */
-    public function test_installed_and_on(): void {
-        $this->assertNotEmpty(get_config('filter_embedpoll', 'version'));
-        $this->assertSame(TEXTFILTER_ON, (int)filter_get_global_states()['embedpoll']->active);
     }
 
     /**
@@ -230,11 +230,12 @@ final class text_filter_test extends \advanced_testcase {
     }
 
     /**
-     * Through format_text(), with the filter on as installed and noclean, as book chapters, pages,
-     * lesson pages, activity descriptions and section summaries are all formatted.
+     * Through format_text(), with the filter on and noclean, as book chapters, pages, lesson pages,
+     * activity descriptions and section summaries are all formatted.
      */
     public function test_end_to_end_through_format_text(): void {
         $this->resetAfterTest();
+        $this->switch_on();
         [$course, $context, $row] = $this->make_book();
         $this->setUser($this->getDataGenerator()->create_and_enrol($course, 'student'));
 
@@ -249,6 +250,7 @@ final class text_filter_test extends \advanced_testcase {
      */
     public function test_cleaned_text_shows_no_poll(): void {
         $this->resetAfterTest();
+        $this->switch_on();
         [$course, $context, $row] = $this->make_book();
         $this->setUser($this->getDataGenerator()->create_and_enrol($course, 'student'));
 

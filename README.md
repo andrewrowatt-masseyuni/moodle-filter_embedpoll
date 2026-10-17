@@ -20,14 +20,6 @@ The poll's options and votes are stored by `local_embedpoll`, which this filter 
 A token whose poll belongs somewhere else shows a notice to those who may manage polls, and
 nothing to anyone else.
 
-The filter switches itself on site-wide when it is installed.
-
-## Upgrading from 1.x
-
-Version 1 recognised typed codes such as `{poll:"Yes","No"}`. That syntax is no longer supported.
-Upgrading drops version 1's tables, `filter_embedpoll_poll` and `filter_embedpoll_vote`, together
-with their votes. Its capabilities are replaced by `local/embedpoll:*`.
-
 ## Requirements
 
 Requires `local_embedpoll`. Moodle 4.5 only.

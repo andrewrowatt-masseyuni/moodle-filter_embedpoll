@@ -88,11 +88,10 @@ belong in `local_embedpoll`.
 * **Section keys are scoped to the course**, because a filter is told the context but not the
   section. Activity keys and section keys never resolve in each other's context.
 * **`SITEID` is a string.** Compare it as `(int)SITEID`.
-* **The version 1 `{poll:"Yes","No"}` syntax was dropped on purpose.** Do not add legacy support.
-  `filter.php` is only a `class_alias` shim. `db/upgrade.php` drops the version 1 tables at
-  2026101700.
-* **`db/install.php` switches the filter on site-wide**, because without it nobody sees any poll.
-  `test_installed_and_on` pins this.
+* **`filter.php` is only a `class_alias` shim.** Keep the logic in `classes/text_filter.php`.
+* **The filter is not switched on when it is installed**; an admin turns it on. Tests that go
+  through `format_text()` switch it on themselves, and so do the Behat features in
+  `local_embedpoll` and `tiny_embedpoll`.
 * **Tests build polls with the `local_embedpoll` generator** (`create_poll` with `cmid` or
   `sectionid`, plus `options`), and call `poll::reset_cache()` in `setUp()`, because polls are
   cached per request.
