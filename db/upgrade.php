@@ -15,22 +15,36 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Web service definitions for Embed poll.
+ * Upgrade steps for the embedded poll filter.
  *
  * @package    filter_embedpoll
  * @copyright  2026 Andrew Rowatt <A.J.Rowatt@massey.ac.nz>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+/**
+ * Upgrade the filter.
+ *
+ * @param int $oldversion The version being upgraded from.
+ * @return bool
+ */
+function xmldb_filter_embedpoll_upgrade($oldversion) {
+    global $DB;
 
-$functions = [
-    'filter_embedpoll_vote' => [
-        'classname' => 'filter_embedpoll\external\vote',
-        'description' => 'Cast or change the current user\'s vote in a poll and return the revealed results.',
-        'type' => 'write',
-        'capabilities' => 'filter/embedpoll:vote',
-        'ajax' => true,
-        'loginrequired' => true,
-    ],
-];
+    $dbman = $DB->get_manager();
+
+    if ($oldversion < 2026101700) {
+        // Polls now live in local_embedpoll, embedded by token. The {poll:...} syntax these tables
+        // served is no longer recognised, so its polls and votes have nothing left to show them.
+        foreach (['filter_embedpoll_vote', 'filter_embedpoll_poll'] as $name) {
+            $table = new xmldb_table($name);
+            if ($dbman->table_exists($table)) {
+                $dbman->drop_table($table);
+            }
+        }
+
+        upgrade_plugin_savepoint(true, 2026101700, 'filter', 'embedpoll');
+    }
+
+    return true;
+}

@@ -15,22 +15,22 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Event observer registrations for Embed poll.
+ * Install steps for the embedded poll filter.
  *
  * @package    filter_embedpoll
  * @copyright  2026 Andrew Rowatt <A.J.Rowatt@massey.ac.nz>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-defined('MOODLE_INTERNAL') || die();
+/**
+ * Switch the filter on site-wide.
+ *
+ * Without it no poll is ever shown, to anyone, so an install that left it disabled would look
+ * broken - teachers would add polls in the editor and see nothing on the page.
+ */
+function xmldb_filter_embedpoll_install() {
+    global $CFG;
 
-$observers = [
-    [
-        'eventname' => '\core\event\course_module_deleted',
-        'callback' => '\filter_embedpoll\observer::course_module_deleted',
-    ],
-    [
-        'eventname' => '\core\event\course_deleted',
-        'callback' => '\filter_embedpoll\observer::course_deleted',
-    ],
-];
+    require_once($CFG->libdir . '/filterlib.php');
+    filter_set_global_state('embedpoll', TEXTFILTER_ON);
+}
